@@ -24,6 +24,35 @@
   font-style: normal;
 }
 
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+.rotated-div {
+  transform: rotate(-33deg);
+  height: 100%;
+  /* background-color: #242424; */
+  right: 45%;
+  width: 40%;
+  left: 49%;
+  top: 1%;
+}
+
+.hiding-div {
+  /* background-color: #242424; */
+  background-color: #3498db;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 /* bebas font */
 
 /* .nav-link {
