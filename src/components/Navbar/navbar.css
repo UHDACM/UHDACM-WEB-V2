@@ -5,17 +5,6 @@
 // <weight>: Use a value from 300 to 700 */
 
 
-
-/* for the roundy font */
-/* .nav-link {
-  font-family: "Fredoka", serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 112.5;
-} */
-
 /* montserrat font */
 .nav-link{
   font-family: "Montserrat", serif;
@@ -33,24 +22,44 @@
   animation: spin 2s linear infinite;
 }
 
-.rotated-div {
-  transform: rotate(-33deg);
-  height: 100%;
-  /* background-color: #242424; */
-  right: 45%;
-  width: 40%;
-  left: 49%;
-  top: 1%;
+.loading-logo {
+  animation: scale-animation 2s forwards;
+  animation-delay: 2s;
 }
 
-.hiding-div {
-  /* background-color: #242424; */
-  background-color: #3498db;
+.gradient-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #ffa500, rgb(19, 19, 19));
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
 }
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.gradient-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
+
+@keyframes scale-animation {
+  0% { transform: scale(1); }      /* Initial state: no scaling */
+  50% { transform:  scale(1.5); } /* Scale up while moving to the right */
+  100% { transform: scale(1); }  /* Scale back to original size while moving down */
+}
+
+
+/* for the roundy font */
+/* .nav-link {
+  font-family: "Fredoka", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 112.5;
+} */
 
 
 /* bebas font */
