@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./navbar.css";
-import logo from './acm.png'
+import logo from "./acm.png";
 import { ChevronDown } from "lucide-react";
 
 const NavItem = ({ text, dropdownItems }) => {
@@ -8,7 +8,7 @@ const NavItem = ({ text, dropdownItems }) => {
 
   return (
     <li className="nav-link relative cursor-pointer">
-      <div 
+      <div
         className="flex items-center gap-2 hover:underline gradient-underline ml-4"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
@@ -22,11 +22,12 @@ const NavItem = ({ text, dropdownItems }) => {
           {text}
         </span>
         {dropdownItems && (
-          <ChevronDown 
-            className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`}
+          <ChevronDown
+            className={`transition-transform duration-300 ${
+              isDropdownOpen ? "rotate-180" : ""
+            }`}
             size={40}
             style={{
-              // background: "linear-gradient(to right, #ffa500, rgb(19, 19, 19))",
               color: "rgb(19,19,19)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -35,28 +36,16 @@ const NavItem = ({ text, dropdownItems }) => {
           />
         )}
       </div>
-      
+
       {dropdownItems && (
-        <ul 
-          className={`
-            ml-8 overflow-hidden transition-all duration-300 
-            ${isDropdownOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
-          `}
+        <ul
+          className={`ml-8 overflow-hidden transition-all duration-300 ${
+            isDropdownOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
         >
           {dropdownItems.map((item, index) => (
-            <li 
-              key={index}
-              className="py-2 text-2xl sm:text-4xl cursor-pointer hover:translate-x-2 transition-transform"
-            >
-              <span
-                style={{
-                  background: "linear-gradient(to right, #ffa500, rgb(19, 19, 19))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                {item}
-              </span>
+            <li key={index} className="text-4xl py-2 translate hover:ml-10 duration-200">
+              <NavItem text={item.text} dropdownItems={item.subItems} />
             </li>
           ))}
         </ul>
@@ -64,6 +53,7 @@ const NavItem = ({ text, dropdownItems }) => {
     </li>
   );
 };
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,13 +71,31 @@ export default function Navbar() {
   const navItems = [
     { text: "Home" },
     { text: "About" },
-    { 
+    {
       text: "Events",
-      dropdownItems: ["Upcoming Events", "Past Events", "Calendar", "Register"]
+      dropdownItems: [
+        {
+          text: "Upcoming Events",
+          subItems: [
+            { text: "Tech Conference" },
+            { text: "Coding Workshop" },
+          ],
+        },
+        {
+          text: "Past Events",
+          subItems: [
+            { text: "Hackathon 2023" },
+            { text: "AI Summit 2022" },
+          ],
+        },
+        { text: "Calendar" },
+        { text: "Register" },
+      ],
     },
     { text: "Store" },
-    { text: "Account" }
+    { text: "Account" },
   ];
+  
 
   return loading ? (
     <div className="flex items-center justify-center h-screen w-screen">
@@ -102,7 +110,7 @@ export default function Navbar() {
       <div className="w-20 absolute top-2">
         <img src={logo} alt="Logo" />
       </div>
-      
+
       <div
         className="w-5 flex flex-col space-y-1 absolute left-3 top-3 cursor-pointer z-10"
         onClick={handleToggle}
@@ -134,7 +142,7 @@ export default function Navbar() {
         }`}
       >
         {navItems.map((item, index) => (
-          <NavItem 
+          <NavItem
             key={index}
             text={item.text}
             dropdownItems={item.dropdownItems}
