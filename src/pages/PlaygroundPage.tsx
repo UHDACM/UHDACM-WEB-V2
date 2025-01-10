@@ -21,6 +21,7 @@ function PGPHeader() {
                 <button onClick={() => navigate('/')} className='border-gray-300'>Back</button>
             </div>
             <Navbar />
+            {/* <Button label={'hello'} /> */}
         </>
     )
 }
