@@ -17,6 +17,7 @@ const NavItem = ({ text, dropdownItems }) => {
             background: "linear-gradient(to right, #ffa500, rgb(19, 19, 19))",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
+            
           }}
         >
           {text}
@@ -53,6 +54,7 @@ const NavItem = ({ text, dropdownItems }) => {
     </li>
   );
 };
+
 
 
 export default function Navbar() {
