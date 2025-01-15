@@ -1,14 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import PersonTile from "../components/PersonTile/PersonTile";
+import Transition from "../components/Transitions/Transition";
+import { useState } from "react";
 
 export default function PlaygroundPage() {
+    const [toggle, setToggle] = useState(false);
     return (
         <>
             <div className='w-screen h-screen flex items-center justify-center align-middle relative'>
                 <PGPHeader/>
-                <div style={{}}>
-                    <PersonTile/>
-                </div>
+                <button onClick={() => setToggle(!toggle)} style={{position: 'absolute', bottom: 20, border: '1px solid #0004'}}>Toggle {toggle}</button>
+                <Transition type='horizontalExpand' toggle={toggle}>
+                    <div style={{width: 20, height: 20, backgroundColor: 'red'}}/>
+                </Transition>
             </div>
         </>
     );
