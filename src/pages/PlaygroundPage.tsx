@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom";
+import PersonTile from "../components/PersonTile/PersonTile";
 
 export default function PlaygroundPage() {
     return (
         <>
             <div className='w-screen h-screen flex items-center justify-center align-middle relative'>
                 <PGPHeader/>
+                <div style={{}}>
+                    <PersonTile/>
+                </div>
             </div>
         </>
     );

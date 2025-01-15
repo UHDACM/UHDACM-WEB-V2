@@ -1,0 +1,31 @@
+.floatHover {
+    box-sizing: content-box;
+    transform: translate(0, 0);
+    border: 1px inset rgba(0, 0, 255, 0);
+    /* transition: transform 300ms ease-in-out; */
+    transition: transform 200ms ease-in-out, border 500ms ease-in-out;
+}
+
+.floatHover:hover {
+    transform: translate(-5px, -5px);
+    border: 1px inset rgba(135, 135, 252, 0.753);
+    /* border: 10px solid blue; */
+}
+
+.shrinkHorizontal {
+    width: initial;
+    transition: width 300ms ease-in-out;
+}
+
+.shrinkHorizontal.active {
+    width: 0;
+}
+
+.fadeOpacity {
+    opacity: 0%;
+    transition: opacity 300ms ease-in-out;
+}
+
+.fadeOpacity.active {
+    opacity: 100%;
+}
