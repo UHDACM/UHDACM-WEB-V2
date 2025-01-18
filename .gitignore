@@ -12,6 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
+src/tailwind_out.css
 
 # Editor directories and files
 .vscode/*
