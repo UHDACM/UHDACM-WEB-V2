@@ -1,9 +1,25 @@
 import React, { HTMLAttributeAnchorTarget, useState } from "react";
 import "./PersonTile.css";
 import Transition from "../Transition/Transition";
-import { Facebook, GithubIcon, Globe, Linkedin, Slack, TwitterIcon, XIcon, YoutubeIcon } from "lucide-react";
+import {
+  Facebook,
+  GithubIcon,
+  Globe,
+  Linkedin,
+  Slack,
+  TwitterIcon,
+  XIcon,
+  YoutubeIcon,
+} from "lucide-react";
 
-type SocialSite = "linkedin" | "x" | "facebook" | "instagram" | "personal_site" | "github" | "youtube";
+type SocialSite =
+  | "linkedin"
+  | "x"
+  | "facebook"
+  | "instagram"
+  | "personal_site"
+  | "github"
+  | "youtube";
 type PersonTileSocial = {
   icon: SocialSite;
   style?: React.CSSProperties;
@@ -19,6 +35,7 @@ export default function PersonTile({
   fullSubtitle,
   fullDescription,
   socials,
+  img,
 }: {
   tileStyle?: React.CSSProperties;
   previewTitle?: string;
@@ -27,6 +44,7 @@ export default function PersonTile({
   fullSubtitle?: string;
   fullDescription?: string;
   socials?: PersonTileSocial[];
+  img?: string;
 }) {
   const [open, setOpen] = useState(false);
   return (
@@ -39,16 +57,13 @@ export default function PersonTile({
           width: 160,
           height: 200,
           borderRadius: 10,
-          backgroundColor: "grey",
+          backgroundColor: "#0002",
           overflow: "hidden",
+          border: "1px solid #00000000",
           ...tileStyle,
         }}
       >
-        <img
-          style={{ height: "100%", objectFit: "cover" }}
-          src="/src/assets/Gael.png"
-        />
-        <div style={{ position: "absolute", bottom: 0, left: 0, margin: 10 }}>
+        <div style={{ position: "absolute", bottom: 0, left: 0, margin: 10, zIndex: 2 }}>
           <p style={{ color: "white", margin: 0, fontSize: "1.25rem" }}>
             {previewTitle || "Title"}
           </p>
@@ -56,6 +71,8 @@ export default function PersonTile({
             {previewSubTitle || "Subtitle"}
           </p>
         </div>
+        <div className="previewImageOverlayGradient"/>
+        <img style={{ height: "100%", objectFit: "cover" }} src={img} />
       </div>
       <PersonTileExpanded
         t={fullTitle}
@@ -64,18 +81,18 @@ export default function PersonTile({
         setOpen={setOpen}
         open={open}
         socials={socials}
+        img={img}
       />
     </>
   );
 }
 
-
 const SocialIconStyle: React.CSSProperties = {
   margin: 3,
   padding: 3,
   borderRadius: 10,
-  border: '1px solid #000a',
-  cursor: 'pointer'
+  border: "1px solid #000a",
+  cursor: "pointer",
 };
 
 function PersonTileExpanded({
@@ -86,6 +103,7 @@ function PersonTileExpanded({
   sT,
   desc,
   socials,
+  img,
 }: {
   open: boolean;
   setOpen: (v: boolean) => void;
@@ -94,10 +112,13 @@ function PersonTileExpanded({
   sT?: string;
   desc?: string;
   socials?: PersonTileSocial[];
+  img?: string;
 }) {
-
-  function HandleClickSocialIcon(href?: string, href_target?: HTMLAttributeAnchorTarget) {
-    href && window.open(href, href_target || '_blank');
+  function HandleClickSocialIcon(
+    href?: string,
+    href_target?: HTMLAttributeAnchorTarget
+  ) {
+    href && window.open(href, href_target || "_blank");
   }
 
   return (
@@ -113,7 +134,7 @@ function PersonTileExpanded({
         left: 0,
         width: "100vw",
         height: "100%",
-        zIndex: 1000
+        zIndex: 1000,
       }}
     >
       <div
@@ -129,7 +150,7 @@ function PersonTileExpanded({
           alignItems: "center",
         }}
       >
-        <div className={'expandedImgAndCardContainer'}>
+        <div className={"expandedImgAndCardContainer"}>
           <Transition
             transitionSpeedMS={300}
             hideOnToggleOff={false}
@@ -140,13 +161,14 @@ function PersonTileExpanded({
             easing="inOutQuart"
             forceClass="imageShiftMobile"
           >
-            <div
-              style={style}
-              className={'expandedImgContainer'}
-            >
+            <div style={style} className={"expandedImgContainer"}>
               <img
-                style={{ height: "100%", objectFit: "cover", position: 'relative' }}
-                src="/src/assets/Gael.png"
+                style={{
+                  height: "100%",
+                  objectFit: "cover",
+                  position: "relative",
+                }}
+                src={img}
               />
             </div>
           </Transition>
@@ -158,9 +180,7 @@ function PersonTileExpanded({
             toggle={open}
             easing="inOutQuart"
           >
-            <div
-              className={'expandedDescriptionCard'}
-            >
+            <div className={"expandedDescriptionCard"}>
               <div style={{ margin: 10 }}>
                 <p
                   style={{
@@ -168,9 +188,9 @@ function PersonTileExpanded({
                     margin: 0,
                     fontSize: "1.5rem",
                     textWrap: "nowrap",
-                    marginBottom: -5
+                    marginBottom: -5,
                   }}
-                  className={'expandedCardText'}
+                  className={"expandedCardText"}
                 >
                   {t || "Title"}
                 </p>
@@ -181,45 +201,119 @@ function PersonTileExpanded({
                     fontSize: "1rem",
                     textWrap: "nowrap",
                     fontWeight: 300,
-                    fontStyle: 'italic'
+                    fontStyle: "italic",
                   }}
-                  className={'expandedCardText'}
+                  className={"expandedCardText"}
                 >
                   {sT || "Subtitle"}
                 </p>
-                <p
-                  className={'expandedCardText expandedCardFullDescription'}
-                >
+                <p className={"expandedCardText expandedCardFullDescription"}>
                   {desc || "Description"}
                 </p>
               </div>
-              <div
-                className="expandedCardIconContainer"
-              >
+              <div className="expandedCardIconContainer">
                 {socials?.map(({ icon, style, href, href_target }, index) => {
                   const key = `Social_Icon_${index}`;
                   switch (icon) {
-                    case 'personal_site':
-                      return <Globe size={40} strokeWidth={1} style={{...SocialIconStyle, ...style}} onClick={() => HandleClickSocialIcon(href, href_target)} key={key} />
-                      case 'facebook':
-                        return <Facebook size={40} strokeWidth={1} style={{...SocialIconStyle, ...style}} onClick={() => HandleClickSocialIcon(href, href_target)} key={key} />
-                      case 'instagram':
-                        return <Slack size={40} strokeWidth={1} style={{...SocialIconStyle, ...style}} onClick={() => HandleClickSocialIcon(href, href_target)} key={key} />
-                      case 'linkedin':
-                        return <Linkedin size={40} strokeWidth={1} style={{...SocialIconStyle, ...style}} onClick={() => HandleClickSocialIcon(href, href_target)} key={key} />
-                      case 'x':
-                        return <TwitterIcon size={40} strokeWidth={1} style={{...SocialIconStyle, ...style}} onClick={() => HandleClickSocialIcon(href, href_target)} key={key} />
-                      case 'github':
-                        return <GithubIcon size={40} strokeWidth={1} style={{...SocialIconStyle, ...style}} onClick={() => HandleClickSocialIcon(href, href_target)} key={key} />
-                      case 'youtube':
-                        return <YoutubeIcon size={40} strokeWidth={1} style={{...SocialIconStyle, ...style}} onClick={() => HandleClickSocialIcon(href, href_target)} key={key} />
+                    case "personal_site":
+                      return (
+                        <Globe
+                          size={40}
+                          strokeWidth={1}
+                          style={{ ...SocialIconStyle, ...style }}
+                          onClick={() =>
+                            HandleClickSocialIcon(href, href_target)
+                          }
+                          key={key}
+                        />
+                      );
+                    case "facebook":
+                      return (
+                        <Facebook
+                          size={40}
+                          strokeWidth={1}
+                          style={{ ...SocialIconStyle, ...style }}
+                          onClick={() =>
+                            HandleClickSocialIcon(href, href_target)
+                          }
+                          key={key}
+                        />
+                      );
+                    case "instagram":
+                      return (
+                        <Slack
+                          size={40}
+                          strokeWidth={1}
+                          style={{ ...SocialIconStyle, ...style }}
+                          onClick={() =>
+                            HandleClickSocialIcon(href, href_target)
+                          }
+                          key={key}
+                        />
+                      );
+                    case "linkedin":
+                      return (
+                        <Linkedin
+                          size={40}
+                          strokeWidth={1}
+                          style={{ ...SocialIconStyle, ...style }}
+                          onClick={() =>
+                            HandleClickSocialIcon(href, href_target)
+                          }
+                          key={key}
+                        />
+                      );
+                    case "x":
+                      return (
+                        <TwitterIcon
+                          size={40}
+                          strokeWidth={1}
+                          style={{ ...SocialIconStyle, ...style }}
+                          onClick={() =>
+                            HandleClickSocialIcon(href, href_target)
+                          }
+                          key={key}
+                        />
+                      );
+                    case "github":
+                      return (
+                        <GithubIcon
+                          size={40}
+                          strokeWidth={1}
+                          style={{ ...SocialIconStyle, ...style }}
+                          onClick={() =>
+                            HandleClickSocialIcon(href, href_target)
+                          }
+                          key={key}
+                        />
+                      );
+                    case "youtube":
+                      return (
+                        <YoutubeIcon
+                          size={40}
+                          strokeWidth={1}
+                          style={{ ...SocialIconStyle, ...style }}
+                          onClick={() =>
+                            HandleClickSocialIcon(href, href_target)
+                          }
+                          key={key}
+                        />
+                      );
                   }
                   // <Facebook size={40} strokeWidth={1} style={SocialIconStyle}  />
                   // <Slack size={40} strokeWidth={1} style={SocialIconStyle}  />
                   // <TwitterIcon size={40} strokeWidth={1} style={SocialIconStyle} />
                 })}
               </div>
-              <XIcon style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }} onClick={() => setOpen(false)}/>
+              <XIcon
+                style={{
+                  position: "absolute",
+                  top: 10,
+                  right: 10,
+                  cursor: "pointer",
+                }}
+                onClick={() => setOpen(false)}
+              />
             </div>
           </Transition>
         </div>

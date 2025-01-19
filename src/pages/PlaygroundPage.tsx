@@ -28,6 +28,7 @@ export default function PlaygroundPage() {
             },
           ]}
           fullDescription={longText}
+          img={'https://deiahri.github.io/portfolio/img/Photo-of-me-rounded.png'}
         />
       </div>
       <div style={{ height: "200vw" }} />
