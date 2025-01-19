@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { easingType } from "../../scripts/easingFunctions";
-import { HorizontalExpandTransitionLayered } from "./Transitions/HorizontalExpandTransitionLayered";
 import { HorizontalExpandTransition } from "./Transitions/HorizontalExpandTransition";
 import { CardFlipTransition } from "./Transitions/CardFlipTransition";
 import WipeTransition from "./Transitions/WipeTransition";
@@ -24,6 +23,7 @@ export default function Transition({
   type,
   toggle,
   forceStyle,
+  forceClass,
   children,
   numFrames = 30,
   transitionSpeedMS = 200,
@@ -33,12 +33,13 @@ export default function Transition({
   easing = "linear",
   cardStyle,
   cardChildren,
-  hideOnToggleOff = true
+  hideOnToggleOff = true,
 }: {
-  children?: React.ReactNode;
-  forceStyle?: React.CSSProperties;
   type: TransitionType;
   toggle: boolean;
+  children?: React.ReactNode;
+  forceStyle?: React.CSSProperties;
+  forceClass?: string;
   transitionSpeedMS?: number;
   numFrames?: number;
   delay?: number;
@@ -47,7 +48,7 @@ export default function Transition({
   easing?: easingType;
   cardStyle?: React.CSSProperties;
   cardChildren?: React.ReactNode;
-  hideOnToggleOff?: boolean
+  hideOnToggleOff?: boolean;
 }) {
   if (transitionSpeedMS < 1) {
     throw new Error("Transition speed cannot be less than 1 ms.");
@@ -60,11 +61,11 @@ export default function Transition({
   }
   const [trueToggle, setTrueToggle] = useState(false);
   const trueToggleTimeoutRef = useRef(-1000);
-  
+
   const [tV, setTV] = useState(0); // short for Transition Value
   const tVIntervalRef = useRef(-1294); // stores interval to cancel later if toggle is changed mid transition
   const transitionUpdateDelayMS = transitionSpeedMS / numFrames;
-  
+
   // if delay is active, true toggle will be changed some time after toggle is changed.
   useEffect(() => {
     clearTimeout(trueToggleTimeoutRef.current);
@@ -83,7 +84,15 @@ export default function Transition({
     } else {
       setTrueToggle(toggle);
     }
-  }, [toggle, delay, delayBefore, delayAfter, setTrueToggle, trueToggle, trueToggleTimeoutRef]);
+  }, [
+    toggle,
+    delay,
+    delayBefore,
+    delayAfter,
+    setTrueToggle,
+    trueToggle,
+    trueToggleTimeoutRef,
+  ]);
 
   // handles adjusting tV according to value of
   useEffect(() => {
@@ -118,21 +127,14 @@ export default function Transition({
   return (
     <>
       {type == "horizontalExpand" && (
-        <HorizontalExpandTransition forceStyle={forceStyle} tV={tV} easing={easing}>
-          {children}
-        </HorizontalExpandTransition>
-      )}
-
-      {type == "horizontalExpandLayered" && (
-        <HorizontalExpandTransitionLayered
+        <HorizontalExpandTransition
+          forceStyle={forceStyle}
           tV={tV}
           easing={easing}
-          layerRateEasing="inOutQuart"
-          layerDepth={2}
-          forceStyle={forceStyle}
+          forceClass={forceClass}
         >
           {children}
-        </HorizontalExpandTransitionLayered>
+        </HorizontalExpandTransition>
       )}
 
       {type == "cardFlip" && (
@@ -142,6 +144,7 @@ export default function Transition({
           cardChildren={cardChildren}
           cardStyle={cardStyle}
           forceStyle={forceStyle}
+          forceClass={forceClass}
         >
           {children}
         </CardFlipTransition>
@@ -154,6 +157,7 @@ export default function Transition({
           tV={tV}
           children={children}
           forceStyle={forceStyle}
+          forceClass={forceClass}
         />
       )}
       {type == "diagonal" && (
@@ -163,10 +167,16 @@ export default function Transition({
           tV={tV}
           children={children}
           forceStyle={forceStyle}
+          forceClass={forceClass}
         />
       )}
       {type == "fade" && (
-        <FadeTransition tV={tV} children={children} forceStyle={forceStyle}/>
+        <FadeTransition
+          tV={tV}
+          children={children}
+          forceStyle={forceStyle}
+          forceClass={forceClass}
+        />
       )}
     </>
   );

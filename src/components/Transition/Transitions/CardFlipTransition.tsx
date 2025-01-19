@@ -12,18 +12,20 @@ export function CardFlipTransition({
     easing,
     cardStyle,
     cardChildren,
-    forceStyle
+    forceStyle,
+    forceClass
   }: {
     children?: React.ReactNode;
     tV: number,
     easing: easingType,
     cardStyle?: React.CSSProperties
     cardChildren?: React.ReactNode;
-    forceStyle?: React.CSSProperties
+    forceStyle?: React.CSSProperties,
+    forceClass?: string
   }) {
     const tVEased = getEasingFunction(easing)(Math.min(tV, 1)) * 2;
     return <>
-    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', ...forceStyle }}>
+    <div className={forceClass} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', ...forceStyle }}>
       <div style={{ position: 'absolute', transform: `scaleX(${Math.max(1-tVEased, 0)})`, ...cardStyle }}>
         {cardChildren}
       </div>

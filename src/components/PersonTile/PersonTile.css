@@ -1,31 +1,106 @@
-.floatHover {
+.expandedImgContainer {
+    width: 200px;
+    position: relative;
+    height: 225px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: #808080;
+    overflow: hidden;
+}
+
+.expandedDescriptionCard {
+    width: 375px;
+    border: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: white;
+    height: 100%;
     box-sizing: content-box;
-    transform: translate(0, 0);
-    border: 1px inset rgba(0, 0, 255, 0);
-    /* transition: transform 300ms ease-in-out; */
-    transition: transform 200ms ease-in-out, border 500ms ease-in-out;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
 }
 
-.floatHover:hover {
-    transform: translate(-5px, -5px);
-    border: 1px inset rgba(135, 135, 252, 0.753);
-    /* border: 10px solid blue; */
+.expandedImgAndCardContainer {
+    height: auto;
+    display: flex;
+    flex-direction: row;
 }
 
-.shrinkHorizontal {
-    width: initial;
-    transition: width 300ms ease-in-out;
+.imageShiftMobile {
+    margin-bottom: 0px;
 }
 
-.shrinkHorizontal.active {
-    width: 0;
+.expandedCardText {
+    text-align: left;
 }
 
-.fadeOpacity {
-    opacity: 0%;
-    transition: opacity 300ms ease-in-out;
+.expandedCardIconContainer {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    display: flex;
+    align-items: end;
 }
 
-.fadeOpacity.active {
-    opacity: 100%;
+.expandedCardFullDescription {
+    max-height: 100px;
+    overflow-y: auto;
+    margin-top: 5;
+}
+
+@media (max-width: 700px) {
+    .expandedImgContainer {
+        width: 100px;
+        height: 120px;
+        border-radius: 10px;
+        background-color: #808080;
+        z-index: 10;
+    }
+    
+    .expandedDescriptionCard {
+        padding-top: 35px;
+        padding-bottom: 50px;
+        min-width: 250px;
+        max-width: 90vw;
+        border: 10px;
+        border-radius: 10px;
+        background-color: white;
+        box-sizing: content-box;
+        position: relative;
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        width: auto;
+    }
+
+    .expandedImgAndCardContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .imageShiftMobile {
+        margin-bottom: -40px;
+        z-index: 5;
+    }
+    
+    .expandedCardText {
+        text-align: center;
+    }
+
+    .expandedCardIconContainer {
+        position: absolute;
+        bottom: 5px;
+        left: unset;
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .expandedCardFullDescription {
+        max-width: 500px;
+        max-height: 250px;
+    }
 }

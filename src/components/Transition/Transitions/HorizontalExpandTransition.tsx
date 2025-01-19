@@ -9,15 +9,17 @@ export function HorizontalExpandTransition({
     children,
     tV,
     easing,
-    forceStyle
+    forceStyle,
+    forceClass
   }: {
     children?: React.ReactNode;
     tV: number,
     easing: easingType,
-    forceStyle?: React.CSSProperties
+    forceStyle?: React.CSSProperties,
+    forceClass?: string
   }) {
     const transitionContainerWidth = getEasingFunction(easing)(tV);
-    return <div style={{ transform: `scaleX(${transitionContainerWidth})`, ...forceStyle }}>
+    return <div className={forceClass} style={{ transform: `scaleX(${transitionContainerWidth})`, ...forceStyle }}>
         {children}
     </div>;
 }

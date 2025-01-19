@@ -1,51 +1,52 @@
 import { useNavigate } from "react-router-dom";
-import Transition from "../components/Transition/Transition";
 import { useState } from "react";
 import PersonTile from "../components/PersonTile/PersonTile";
-import Button from "../components/Button/Button";
 import Navbar from "../components/Navbar/Navbar";
 
-
+const shortText =
+  "Placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit.";
+const longText =
+  "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod repudiandae ipsam reprehenderit corporis deleniti iusto architecto quibusdam doloremque consectetur, placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit. Laborum, optio, enim eveniet cum, dolore deleniti quae eaque praesentium voluptatibus quibusdam quos tenetur animi? Nostrum, placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit. Laborum, optio, enim eveniet cum, dolore deleniti quae eaque praesentium voluptatibus quibusdam quos tenetur animi? Nostrum, placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit. Laborum, optio, enim eveniet cum, dolore deleniti quae eaque praesentium voluptatibus quibusdam quos tenetur animi? Nostrum.";
 export default function PlaygroundPage() {
-    const [toggle, setToggle] = useState(false);
-    return (
-        <>
-            <div className='w-screen h-screen flex items-center justify-center align-middle relative'>
-                <PGPHeader/>
-                <PersonTile/>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="w-screen h-screen flex items-center justify-center align-middle relative">
+        <PGPHeader />
+        <PersonTile
+          previewTitle="Gael C."
+          fullTitle="Gael Bomboclat Cruz"
+          previewSubTitle="Developer"
+          fullSubtitle="Developer"
+          socials={[
+            {
+              icon: "personal_site",
+              href: "https://deiahri.github.io/portfolio",
+            },
+            {
+              icon: "youtube",
+              href: "https://www.youtube.com/@DeiahriDev-kz6xs",
+            },
+          ]}
+          fullDescription={longText}
+        />
+      </div>
+      <div style={{ height: "200vw" }} />
+      {/* added this to test components that should be fixed to the screen on scroll */}
+    </>
+  );
 }
 
-{/* <button onClick={() => setToggle(!toggle)} style={{position: 'absolute', bottom: 20, border: '1px solid #0004'}}>Toggle: {toggle?'on':'off'}</button>
-<Transition delay={0} easing='inOutQuart' type='diagonal' numFrames={100} transitionSpeedMS={1000} toggle={toggle} cardStyle={{ backgroundColor: 'grey', width: 200, height: 300, borderRadius: 5 }}>
-    <div style={{width: 200, height: 200, backgroundColor: 'red'}}/>
-    <p>Diagonal</p>
-</Transition>
-<div style={{width: 10, height: 10}}></div>
-<Transition delay={0} easing='inOutQuart' type='wipe' numFrames={100} transitionSpeedMS={1000} toggle={toggle} cardStyle={{ backgroundColor: 'grey', width: 200, height: 300, borderRadius: 5 }}>
-    <div style={{width: 200, height: 200, backgroundColor: 'red'}}/>
-    <p>Wipe</p>
-</Transition>
-<div style={{width: 10, height: 10}}></div>
-<Transition delay={0} easing='inOutQuart' type='horizontalExpand' numFrames={100} transitionSpeedMS={1000} toggle={toggle} cardStyle={{ backgroundColor: 'grey', width: 200, height: 300, borderRadius: 5 }}>
-    <div style={{width: 200, height: 200, backgroundColor: 'red'}}/>
-    <p>Horizontal Expand</p>
-</Transition>
-<div style={{width: 10, height: 10}}></div>
-<div style={{width: 10, height: 10}}></div> */}
-
-
 function PGPHeader() {
-    const navigate = useNavigate();
-    return (
-        <>
-            <div className='absolute bottom-2 left-2'>
-                <button onClick={() => navigate('/')} className='border-gray-300'>Back</button>
-            </div>
-            <Navbar />
-            {/* <Button label={'hello'} /> */}
-        </>
-    )
+  const navigate = useNavigate();
+  return (
+    <>
+      <div className="absolute bottom-2 left-2">
+        <button onClick={() => navigate("/")} className="border-gray-300">
+          Back
+        </button>
+      </div>
+      <Navbar />
+      {/* <Button label={'hello'} /> */}
+    </>
+  );
 }
