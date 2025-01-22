@@ -1,18 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { easingType } from "../../scripts/easingFunctions";
-import { HorizontalExpandTransition } from "./Transitions/HorizontalExpandTransition";
-import { CardFlipTransition } from "./Transitions/CardFlipTransition";
 import WipeTransition from "./Transitions/WipeTransition";
 import DiagonalTransition from "./Transitions/DiagonalExpandTransition";
 import FadeTransition from "./Transitions/FadeTransition";
+import { CardinalDirection } from "../../scripts/types";
 
-type TransitionType =
-  | "horizontalExpand"
-  | "horizontalExpandLayered"
-  | "cardFlip"
-  | "wipe"
-  | "diagonal"
-  | "fade";
+type TransitionType = "wipe" | "diagonal" | "fade";
 /**
  *
  * Note: container width and height do not work very well at the moment.
@@ -25,14 +18,13 @@ export default function Transition({
   forceStyle,
   forceClass,
   children,
-  numFrames = 30,
+  fps = 60,
   transitionSpeedMS = 200,
   delay = 0,
   delayBefore,
   delayAfter,
+  direction,
   easing = "linear",
-  cardStyle,
-  cardChildren,
   hideOnToggleOff = true,
 }: {
   type: TransitionType;
@@ -41,10 +33,11 @@ export default function Transition({
   forceStyle?: React.CSSProperties;
   forceClass?: string;
   transitionSpeedMS?: number;
-  numFrames?: number;
+  fps?: number;
   delay?: number;
   delayBefore?: number;
   delayAfter?: number;
+  direction?: CardinalDirection
   easing?: easingType;
   cardStyle?: React.CSSProperties;
   cardChildren?: React.ReactNode;
@@ -52,8 +45,8 @@ export default function Transition({
 }) {
   if (transitionSpeedMS < 1) {
     throw new Error("Transition speed cannot be less than 1 ms.");
-  } else if (numFrames < 2) {
-    throw new Error("Number of frames cannot be less than 2");
+  } else if (fps < 0) {
+    throw new Error("FPS cannot be less than 0");
   } else if (delay < 0) {
     throw new Error("Delay cannot be negative");
   } else if ((delayBefore || delayAfter) && delay) {
@@ -64,7 +57,14 @@ export default function Transition({
 
   const [tV, setTV] = useState(0); // short for Transition Value
   const tVIntervalRef = useRef(-1294); // stores interval to cancel later if toggle is changed mid transition
+  const numFrames = Math.max((transitionSpeedMS/1000) * fps, 2);
   const transitionUpdateDelayMS = transitionSpeedMS / numFrames;
+
+  useEffect(() => {
+    if (numFrames <= 2) {
+      console.error('Warning, fps is too low. Transition behavior can be unexpected.');
+    }
+  }, []);
 
   // if delay is active, true toggle will be changed some time after toggle is changed.
   useEffect(() => {
@@ -126,30 +126,6 @@ export default function Transition({
 
   return (
     <>
-      {type == "horizontalExpand" && (
-        <HorizontalExpandTransition
-          forceStyle={forceStyle}
-          tV={tV}
-          easing={easing}
-          forceClass={forceClass}
-        >
-          {children}
-        </HorizontalExpandTransition>
-      )}
-
-      {type == "cardFlip" && (
-        <CardFlipTransition
-          tV={tV}
-          easing={easing}
-          cardChildren={cardChildren}
-          cardStyle={cardStyle}
-          forceStyle={forceStyle}
-          forceClass={forceClass}
-        >
-          {children}
-        </CardFlipTransition>
-      )}
-
       {type == "wipe" && (
         <WipeTransition
           toggle={trueToggle}
@@ -158,6 +134,7 @@ export default function Transition({
           children={children}
           forceStyle={forceStyle}
           forceClass={forceClass}
+          direction={direction}
         />
       )}
       {type == "diagonal" && (

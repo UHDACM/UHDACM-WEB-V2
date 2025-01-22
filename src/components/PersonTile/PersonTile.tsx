@@ -11,6 +11,7 @@ import {
   XIcon,
   YoutubeIcon,
 } from "lucide-react";
+import { AnyFunction, CardinalDirection } from "../../scripts/types";
 
 type SocialSite =
   | "linkedin"
@@ -25,32 +26,44 @@ type PersonTileSocial = {
   style?: React.CSSProperties;
   href?: string;
   href_target?: HTMLAttributeAnchorTarget;
+  onClick?: AnyFunction
 };
 
 export default function PersonTile({
   tileStyle,
+  previewTitleStyle,
+  previewSubTitleStyle,
+  img,
   previewTitle,
   previewSubTitle,
   fullTitle,
   fullSubtitle,
   fullDescription,
   socials,
-  img,
+  onClickTile,
+  onClose,
 }: {
   tileStyle?: React.CSSProperties;
+  previewTitleStyle?: React.CSSProperties;
+  previewSubTitleStyle?: React.CSSProperties;
+  img?: string;
   previewTitle?: string;
   previewSubTitle?: string;
   fullTitle?: string;
   fullSubtitle?: string;
   fullDescription?: string;
   socials?: PersonTileSocial[];
-  img?: string;
+  onClickTile?: AnyFunction;
+  onClose?: AnyFunction;
 }) {
   const [open, setOpen] = useState(false);
   return (
     <>
       <div
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          setOpen(!open);
+          onClickTile && onClickTile();
+        }}
         style={{
           cursor: "pointer",
           position: "relative",
@@ -63,15 +76,37 @@ export default function PersonTile({
           ...tileStyle,
         }}
       >
-        <div style={{ position: "absolute", bottom: 0, left: 0, margin: 10, zIndex: 2 }}>
-          <p style={{ color: "white", margin: 0, fontSize: "1.25rem" }}>
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            margin: 10,
+            zIndex: 2,
+          }}
+        >
+          <p
+            style={{
+              color: "white",
+              margin: 0,
+              fontSize: "1.25rem",
+              ...previewTitleStyle,
+            }}
+          >
             {previewTitle || "Title"}
           </p>
-          <p style={{ color: "white", margin: 0, fontSize: "0.75rem" }}>
+          <p
+            style={{
+              color: "white",
+              margin: 0,
+              fontSize: "0.75rem",
+              ...previewSubTitleStyle,
+            }}
+          >
             {previewSubTitle || "Subtitle"}
           </p>
         </div>
-        <div className="previewImageOverlayGradient"/>
+        <div className="previewImageOverlayGradient" />
         <img style={{ height: "100%", objectFit: "cover" }} src={img} />
       </div>
       <PersonTileExpanded
@@ -82,11 +117,13 @@ export default function PersonTile({
         open={open}
         socials={socials}
         img={img}
+        onClose={onClose}
       />
     </>
   );
 }
 
+const wipeDir: CardinalDirection = "right";
 const SocialIconStyle: React.CSSProperties = {
   margin: 3,
   padding: 3,
@@ -104,6 +141,7 @@ function PersonTileExpanded({
   desc,
   socials,
   img,
+  onClose,
 }: {
   open: boolean;
   setOpen: (v: boolean) => void;
@@ -113,6 +151,7 @@ function PersonTileExpanded({
   desc?: string;
   socials?: PersonTileSocial[];
   img?: string;
+  onClose?: AnyFunction;
 }) {
   function HandleClickSocialIcon(
     href?: string,
@@ -125,7 +164,7 @@ function PersonTileExpanded({
     <Transition
       delayAfter={300}
       transitionSpeedMS={200}
-      numFrames={50}
+      fps={30}
       type="fade"
       toggle={open}
       forceStyle={{
@@ -158,6 +197,8 @@ function PersonTileExpanded({
             toggle={open}
             delayBefore={200}
             delayAfter={100}
+            fps={60}
+            direction={wipeDir}
             easing="inOutQuart"
             forceClass="imageShiftMobile"
           >
@@ -177,6 +218,8 @@ function PersonTileExpanded({
             delayBefore={200}
             hideOnToggleOff={false}
             type="wipe"
+            direction={wipeDir}
+            fps={60}
             toggle={open}
             easing="inOutQuart"
           >
@@ -212,18 +255,21 @@ function PersonTileExpanded({
                 </p>
               </div>
               <div className="expandedCardIconContainer">
-                {socials?.map(({ icon, style, href, href_target }, index) => {
+                {socials?.map(({ icon, style, href, href_target, onClick }, index) => {
                   const key = `Social_Icon_${index}`;
+                  const onClickFunc = () => {
+                    HandleClickSocialIcon(href, href_target);
+                    onClick && onClick();
+                  }
+                  const combinedStyles = { ...SocialIconStyle, ...style }
                   switch (icon) {
                     case "personal_site":
                       return (
                         <Globe
                           size={40}
                           strokeWidth={1}
-                          style={{ ...SocialIconStyle, ...style }}
-                          onClick={() =>
-                            HandleClickSocialIcon(href, href_target)
-                          }
+                          style={combinedStyles}
+                          onClick={onClickFunc}
                           key={key}
                         />
                       );
@@ -232,10 +278,8 @@ function PersonTileExpanded({
                         <Facebook
                           size={40}
                           strokeWidth={1}
-                          style={{ ...SocialIconStyle, ...style }}
-                          onClick={() =>
-                            HandleClickSocialIcon(href, href_target)
-                          }
+                          style={combinedStyles}
+                          onClick={onClickFunc}
                           key={key}
                         />
                       );
@@ -244,10 +288,8 @@ function PersonTileExpanded({
                         <Slack
                           size={40}
                           strokeWidth={1}
-                          style={{ ...SocialIconStyle, ...style }}
-                          onClick={() =>
-                            HandleClickSocialIcon(href, href_target)
-                          }
+                          style={combinedStyles}
+                          onClick={onClickFunc}
                           key={key}
                         />
                       );
@@ -256,10 +298,8 @@ function PersonTileExpanded({
                         <Linkedin
                           size={40}
                           strokeWidth={1}
-                          style={{ ...SocialIconStyle, ...style }}
-                          onClick={() =>
-                            HandleClickSocialIcon(href, href_target)
-                          }
+                          style={combinedStyles}
+                          onClick={onClickFunc}
                           key={key}
                         />
                       );
@@ -268,10 +308,8 @@ function PersonTileExpanded({
                         <TwitterIcon
                           size={40}
                           strokeWidth={1}
-                          style={{ ...SocialIconStyle, ...style }}
-                          onClick={() =>
-                            HandleClickSocialIcon(href, href_target)
-                          }
+                          style={combinedStyles}
+                          onClick={onClickFunc}
                           key={key}
                         />
                       );
@@ -280,10 +318,8 @@ function PersonTileExpanded({
                         <GithubIcon
                           size={40}
                           strokeWidth={1}
-                          style={{ ...SocialIconStyle, ...style }}
-                          onClick={() =>
-                            HandleClickSocialIcon(href, href_target)
-                          }
+                          style={combinedStyles}
+                          onClick={onClickFunc}
                           key={key}
                         />
                       );
@@ -292,10 +328,8 @@ function PersonTileExpanded({
                         <YoutubeIcon
                           size={40}
                           strokeWidth={1}
-                          style={{ ...SocialIconStyle, ...style }}
-                          onClick={() =>
-                            HandleClickSocialIcon(href, href_target)
-                          }
+                          style={combinedStyles}
+                          onClick={onClickFunc}
                           key={key}
                         />
                       );
@@ -312,7 +346,10 @@ function PersonTileExpanded({
                   right: 10,
                   cursor: "pointer",
                 }}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  onClose && onClose();
+                }}
               />
             </div>
           </Transition>

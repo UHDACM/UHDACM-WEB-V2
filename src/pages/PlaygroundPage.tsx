@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import PersonTile from "../components/PersonTile/PersonTile";
 import Navbar from "../components/Navbar/Navbar";
 
