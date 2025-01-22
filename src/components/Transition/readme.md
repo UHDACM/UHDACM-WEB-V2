@@ -1,4 +1,4 @@
-# Transitions
+# Transition
 Encapsulate your components in a transition component to reveal it with one of the available transition types.
 
 Makes revealing stuff (in a cool way) easy
@@ -16,7 +16,7 @@ Makes revealing stuff (in a cool way) easy
 |direction|Currently only used for the wipe transition. Specifies the direction of the wipe.|
 |hideOnToggleOff|When toggle is false, the transition will remove itself from the DOM.|
 
-Note: Do not import directly. Use `Transition` and specify a transition `type`.
+<mark>**Note**: DO NOT IMPORT INIVIDUAL TRANSITIONS DIRECTLY (e.g.: WipeTransition).</mark> Use `Transition` and specify a transition `type` instead.
 ### Transition: Wipe
 Shows contents by expanding diagonally. Specify `direction` to control the direction of the wipe.
 
