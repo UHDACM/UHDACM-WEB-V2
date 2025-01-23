@@ -22,10 +22,10 @@ function PGPHeader() {
     const events = [
       {
         title: "Tech Conference 2025",
-        location: "San Francisco, CA",
+        location: "N420 ",
         description:
           "Join us for a day of insightful talks and networking opportunities with industry leaders.",
-        date: "January 25, 2025",
+        date: "2/10/2025",
         startTime: "1:00PM",
         endTime: "5:00PM",
         status: "live",
@@ -36,7 +36,7 @@ function PGPHeader() {
         location: "New York, NY",
         description:
           "Learn the latest trends in design with hands-on activities and expert guidance.",
-        date: "February 10, 2025",
+        date: "2/10/2025",
         startTime: "1:00PM",
         endTime: "5:00PM",
         status: "upcoming",
@@ -65,6 +65,8 @@ function PGPHeader() {
                 location={event.location}
                 description={event.description}
                 date={event.date}
+                startTime={event.startTime}
+                endTime={event.endTime}
                 status={event.status}
                 photo={event.photo}
               />
