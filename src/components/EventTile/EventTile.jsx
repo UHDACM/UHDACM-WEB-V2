@@ -23,7 +23,7 @@ const EventTile = ({
   if (small) {
     // Compact layout for upcoming events
     return (
-      <div className="rounded-lg shadow-md p-2 h-28 bg-zinc-900 flex flex-col relative space-y-4 transition-transform transform hover:scale-105">
+      <div className="rounded-lg shadow-md p-2 h-28 bg-zinc-900 flex flex-col relative justify-between transition-transform transform hover:scale-105">
         <div className="flex space-x-4">
           {photo && (
             <img
@@ -33,11 +33,15 @@ const EventTile = ({
             />
           )}
           <div className="flex flex-col justify-between flex-grow">
-            <h3 className="text-sm font-semibold text-white">{title}</h3>
+            <div className="flex justify-between items-center">
+              <h3 className="text-sm font-semibold text-white">{title}</h3>
+              <p className="text-xs bg-white text-black px-4 py-0.5 rounded-2xl font-semibold">Open</p>
+            </div>
+            <p className="text-xs text-white line-clamp-2">{description}</p>
           </div>
         </div>
         <div>
-          <div className="flex">
+          <div className="flex items-center justify-between">
             <p className="text-xs text-white flex justify-between items-center">
               <span className="font-medium">
                 <svg
@@ -56,7 +60,7 @@ const EventTile = ({
               {location}
             </p>
             <p className="text-xs italic">
-              {date} | {startTime} - {endTime}
+              {date} {startTime} - {endTime}
             </p>
           </div>
         </div>

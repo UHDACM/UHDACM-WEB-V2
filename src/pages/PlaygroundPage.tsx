@@ -35,7 +35,40 @@ function PGPHeader() {
         title: "Design Workshop",
         location: "New York, NY",
         description:
-          "Learn the latest trends in design with hands-on activities and expert guidance.",
+          "Learn the latest trends in design with hands-on activities and expert guidance. Learn the latest trends in design with hands-on activities and expert guidance",
+        date: "2/10/2025",
+        startTime: "1:00PM",
+        endTime: "5:00PM",
+        status: "upcoming",
+        photo: "https://www.liveabout.com/thmb/qgTDxoMnDXir0RugxsmPEPVrpHw=/5171x3448/filters:fill(auto,1)/98841996-56a34ef95f9b58b7d0d16c26.jpg",
+      },
+      {
+        title: "Design Workshop",
+        location: "New York, NY",
+        description:
+          "Learn the latest trends in design with hands-on activities and expert guidance. Learn the latest trends in design with hands-on activities and expert guidance",
+        date: "2/10/2025",
+        startTime: "1:00PM",
+        endTime: "5:00PM",
+        status: "upcoming",
+        photo: "https://www.liveabout.com/thmb/qgTDxoMnDXir0RugxsmPEPVrpHw=/5171x3448/filters:fill(auto,1)/98841996-56a34ef95f9b58b7d0d16c26.jpg",
+      },
+      {
+        title: "Design Workshop",
+        location: "New York, NY",
+        description:
+          "Learn the latest trends in design with hands-on activities and expert guidance. Learn the latest trends in design with hands-on activities and expert guidance",
+        date: "2/10/2025",
+        startTime: "1:00PM",
+        endTime: "5:00PM",
+        status: "upcoming",
+        photo: "https://www.liveabout.com/thmb/qgTDxoMnDXir0RugxsmPEPVrpHw=/5171x3448/filters:fill(auto,1)/98841996-56a34ef95f9b58b7d0d16c26.jpg",
+      },
+      {
+        title: "Design Workshop",
+        location: "New York, NY",
+        description:
+          "Learn the latest trends in design with hands-on activities and expert guidance. Learn the latest trends in design with hands-on activities and expert guidance",
         date: "2/10/2025",
         startTime: "1:00PM",
         endTime: "5:00PM",
@@ -77,7 +110,7 @@ function PGPHeader() {
           {upcomingEvents.length > 0 && (
             <div>
               <h2 className="text-xl font-bold text-white mb-4">Upcoming Events</h2>
-              <div className="space-y-2 overflow-y-auto max-h-64 p-4 rounded-lg bg-zinc-800">
+              <div className="w-96 space-y-2 overflow-y-auto max-h-64 p-4 rounded-lg bg-zinc-800">
                 {upcomingEvents.map((event, index) => (
                   <EventTile
                     key={index}
