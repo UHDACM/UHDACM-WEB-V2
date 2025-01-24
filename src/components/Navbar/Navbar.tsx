@@ -9,7 +9,7 @@ const NavItem = ({ text, dropdownItems }) => {
   return (
     <li className="nav-link relative cursor-pointer">
       <div
-        className="flex items-center gap-2 hover:underline gradient-underline ml-4"
+        className="flex items-center gap-2 gradient-underline ml-4"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <span
@@ -17,7 +17,6 @@ const NavItem = ({ text, dropdownItems }) => {
             background: "linear-gradient(to right, #ffa500, rgb(19, 19, 19))",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            
           }}
         >
           {text}
@@ -45,7 +44,10 @@ const NavItem = ({ text, dropdownItems }) => {
           }`}
         >
           {dropdownItems.map((item, index) => (
-            <li key={index} className="text-4xl py-2 translate hover:ml-10 duration-200">
+            <li
+              key={index}
+              className="text-4xl py-2 translate hover:ml-10 duration-200"
+            >
               <NavItem text={item.text} dropdownItems={item.subItems} />
             </li>
           ))}
@@ -54,8 +56,6 @@ const NavItem = ({ text, dropdownItems }) => {
     </li>
   );
 };
-
-
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,17 +78,11 @@ export default function Navbar() {
       dropdownItems: [
         {
           text: "Upcoming Events",
-          subItems: [
-            { text: "Tech Conference" },
-            { text: "Coding Workshop" },
-          ],
+          subItems: [{ text: "Tech Conference" }, { text: "Coding Workshop" }],
         },
         {
           text: "Past Events",
-          subItems: [
-            { text: "Hackathon 2023" },
-            { text: "AI Summit 2022" },
-          ],
+          subItems: [{ text: "Hackathon 2023" }, { text: "AI Summit 2022" }],
         },
         { text: "Calendar" },
         { text: "Register" },
@@ -97,10 +91,9 @@ export default function Navbar() {
     { text: "Store" },
     { text: "Account" },
   ];
-  
 
   return loading ? (
-    <div className="flex items-center justify-center h-screen w-screen">
+    <div className="fixed flex items-center justify-center h-screen w-screen z-40 bg-stone-900">
       <div className="absolute logo-div">
         <div className="loading-logo">
           <img src={logo} alt="Logo" />
@@ -109,14 +102,16 @@ export default function Navbar() {
     </div>
   ) : (
     <>
-      <div className="w-20 absolute top-2">
+      <div className="fixed w-20 z-40  top-2 ">
         <img src={logo} alt="Logo" />
       </div>
 
       <div
-        className="w-5 flex flex-col space-y-1 absolute left-3 top-3 cursor-pointer z-10"
+        className="w-5 flex flex-col space-y-1 fixed left-3 top-3 cursor-pointer z-50"
         onClick={handleToggle}
+        aria-expanded={isOpen}
       >
+        {/* First Line */}
         <div
           className={`w-full h-0.5 transition-transform duration-300 ${
             isOpen
@@ -124,11 +119,15 @@ export default function Navbar() {
               : "bg-stone-50"
           }`}
         ></div>
+
+        {/* Middle Line */}
         <div
           className={`w-full h-0.5 transition-opacity duration-300 ${
             isOpen ? "opacity-0" : "opacity-100 bg-stone-50"
           }`}
         ></div>
+
+        {/* Third Line */}
         <div
           className={`w-full h-0.5 transition-transform duration-300 ${
             isOpen
@@ -139,7 +138,7 @@ export default function Navbar() {
       </div>
 
       <ul
-        className={`nav-link w-full h-screen absolute top-0 left-0 flex flex-col justify-evenly items-left bg-stone-50 z-0 text-4xl sm:text-6xl transition-transform duration-300 ${
+        className={`fixed nav-link w-full h-screen top-0 left-0 flex flex-col justify-evenly items-left bg-stone-50 z-10 text-4xl sm:text-6xl transition-transform duration-300 ${
           isOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
