@@ -35,7 +35,9 @@ const EventTile = ({
           <div className="flex flex-col justify-between flex-grow">
             <div className="flex justify-between items-center">
               <h3 className="text-sm font-semibold text-white">{title}</h3>
-              <p className="text-xs bg-white text-black px-4 py-0.5 rounded-2xl font-semibold">Open</p>
+              <p className="text-xs bg-white text-black px-4 py-0.5 rounded-2xl font-semibold">
+                Open
+              </p>
             </div>
             <p className="text-xs text-white line-clamp-2">{description}</p>
           </div>
@@ -84,15 +86,18 @@ const EventTile = ({
           {status.charAt(0).toUpperCase() + status.slice(1)}
         </div>
       )}
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold text-white">{title}</h3>
+        <p className="text-xs bg-white text-black px-4 py-0.5 rounded-2xl font-semibold">Open</p>
+      </div>
       <p className="text-sm text-gray-500 italic">{`${date} ${startTime} - ${endTime}`}</p>
       <p className="text-sm text-white line-clamp-3">{description}</p>
       <div className="flex justify-between items-center space-x-4">
-        <p className="text-sm text-white flex">
+        <p className="text-sm text-white flex items-center">
           <span className="font-medium">
             <svg
               width="24"
-              height="25"
+              height=""
               viewBox="0 0 24 25"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

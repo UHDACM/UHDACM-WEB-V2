@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 // import Button from "../components/Button/Button";
 // import Navbar from "../components/Navbar/Navbar";
-import EventTile from "../components/EventTile/EventTile.jsx"
-import EventPhoto from "../components/EventTile/acm.png"
+// import EventTile from "../components/EventTile/EventTile.jsx"
+// import EventPhoto from "../components/EventTile/acm.png"
 
 
 
