@@ -9,7 +9,7 @@ const longText =
 export default function PlaygroundPage() {
   return (
     <>
-      <div className="w-screen h-screen flex items-center justify-center align-middle relative">
+      <div className="w-screen h-screen flex items-center justify-center align-middle relative" style={{backgroundColor: '#111'}}>
         <PGPHeader />
         <PersonTile
           previewTitle="Gael C."
