@@ -103,7 +103,7 @@ export default function Navbar() {
     </div>
   ) : (
     <>
-      <div style={{backgroundColor: "#161618"}} className="flex items-center fixed top-0 w-screen px-4 justify-between z-50 backdrop-blur-sm">
+      <div style={{backgroundColor: isOpen ? 'transparent' : '#161618', transition: "background-color 300ms ease-in-out"}} className="flex items-center fixed top-0 w-screen px-4 justify-between z-50 backdrop-blur-sm">
 
         <div
           className="w-5 flex flex-col space-y-1 cursor-pointer z-50"

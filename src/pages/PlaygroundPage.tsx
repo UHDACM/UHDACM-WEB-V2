@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import PersonTile from "../components/PersonTile/PersonTile";
 import Navbar from "../components/Navbar/Navbar";
+import { icons } from "lucide-react";
 
 const shortText =
   "Placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit.";
@@ -25,9 +26,25 @@ export default function PlaygroundPage() {
               icon: "youtube",
               href: "https://www.youtube.com/@DeiahriDev-kz6xs",
             },
+            {
+              icon: 'facebook',
+              href: "https://www.youtube.com/@DeiahriDev-kz6xs",
+            },
+            {
+                icon: 'instagram',
+            },
+            {
+                icon: 'linkedin'
+            },
+            {
+                icon: 'x'
+            },
+            
           ]}
           fullDescription={longText}
-          img={'https://deiahri.github.io/portfolio/img/Photo-of-me-rounded.png'}
+          img={
+            "https://deiahri.github.io/portfolio/img/Photo-of-me-rounded.png"
+          }
         />
       </div>
       <div style={{ height: "200vw" }} />
