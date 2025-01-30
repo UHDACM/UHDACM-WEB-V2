@@ -7,29 +7,6 @@ const shortText =
 const longText =
   "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod repudiandae ipsam reprehenderit corporis deleniti iusto architecto quibusdam doloremque consectetur, placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit. Laborum, optio, enim eveniet cum, dolore deleniti quae eaque praesentium voluptatibus quibusdam quos tenetur animi? Nostrum, placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit. Laborum, optio, enim eveniet cum, dolore deleniti quae eaque praesentium voluptatibus quibusdam quos tenetur animi? Nostrum, placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit. Laborum, optio, enim eveniet cum, dolore deleniti quae eaque praesentium voluptatibus quibusdam quos tenetur animi? Nostrum.";
 export default function PlaygroundPage() {
-<<<<<<< HEAD
-    return (
-        <>
-            <div style={{backgroundColor: "#161618"}} className='w-screen h-screen flex items-center justify-center align-middle relative'>
-                <PGPHeader/>
-            </div>
-        </>
-    );
-}
-
-function PGPHeader() {
-    const navigate = useNavigate();
-    return (
-        <>
-            <div className='absolute bottom-2 left-2'>
-                <button onClick={() => navigate('/')} className='border-gray-300'>Back</button>
-            </div>
-            <Navbar />
-            <div style={{width: "20px", height: "300vh"}}></div>
-            <Button label={'hello'} />
-        </>
-    )
-=======
   return (
     <>
       <div className="w-screen h-screen flex items-center justify-center align-middle relative">
@@ -72,5 +49,4 @@ function PGPHeader() {
       {/* <Button label={'hello'} /> */}
     </>
   );
->>>>>>> 26acce6345f3a3a551550f8f2b1c79339788b420
 }
