@@ -103,7 +103,7 @@ export default function Navbar() {
     </div>
   ) : (
     <>
-      <div style={{backgroundColor: "#161618"}} className="flex items-center fixed top-0 w-screen px-4 justify-between z-50">
+      <div style={{backgroundColor: "#161618"}} className="flex items-center fixed top-0 w-screen px-4 justify-between z-50 backdrop-blur-sm">
 
         <div
           className="w-5 flex flex-col space-y-1 cursor-pointer z-50"
@@ -138,9 +138,7 @@ export default function Navbar() {
         <div className="w-20 z-40  top-2 ">
           <img src={logo} alt="Logo" />
         </div>
-        <div className="w-20 h-20">
-
-        </div>
+        <div className="w-20 h-20"></div>
       </div>
 
       <ul
