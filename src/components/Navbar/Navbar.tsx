@@ -9,15 +9,15 @@ const NavItem = ({ text, dropdownItems }) => {
   return (
     <li className="nav-link relative cursor-pointer">
       <div
-        className="flex items-center gap-2 hover:underline gradient-underline ml-4"
+        className="flex items-center gap-2 gradient-underline ml-4"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <span
           style={{
-            background: "linear-gradient(to right, #ffa500, rgb(19, 19, 19))",
+            background:
+              "linear-gradient(to right,rgb(255, 255, 255), rgb(255, 255, 255))",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            
           }}
         >
           {text}
@@ -29,7 +29,7 @@ const NavItem = ({ text, dropdownItems }) => {
             }`}
             size={40}
             style={{
-              color: "rgb(19,19,19)",
+              color: "#fff",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}
@@ -45,7 +45,10 @@ const NavItem = ({ text, dropdownItems }) => {
           }`}
         >
           {dropdownItems.map((item, index) => (
-            <li key={index} className="text-4xl py-2 translate hover:ml-10 duration-200">
+            <li
+              key={index}
+              className="text-4xl py-2 translate hover:ml-10 duration-200"
+            >
               <NavItem text={item.text} dropdownItems={item.subItems} />
             </li>
           ))}
@@ -54,8 +57,6 @@ const NavItem = ({ text, dropdownItems }) => {
     </li>
   );
 };
-
-
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,17 +79,11 @@ export default function Navbar() {
       dropdownItems: [
         {
           text: "Upcoming Events",
-          subItems: [
-            { text: "Tech Conference" },
-            { text: "Coding Workshop" },
-          ],
+          subItems: [{ text: "Tech Conference" }, { text: "Coding Workshop" }],
         },
         {
           text: "Past Events",
-          subItems: [
-            { text: "Hackathon 2023" },
-            { text: "AI Summit 2022" },
-          ],
+          subItems: [{ text: "Hackathon 2023" }, { text: "AI Summit 2022" }],
         },
         { text: "Calendar" },
         { text: "Register" },
@@ -97,10 +92,9 @@ export default function Navbar() {
     { text: "Store" },
     { text: "Account" },
   ];
-  
 
   return loading ? (
-    <div className="flex items-center justify-center h-screen w-screen">
+    <div className="fixed flex items-center justify-center h-screen w-screen z-40 bg-stone-900">
       <div className="absolute logo-div">
         <div className="loading-logo">
           <img src={logo} alt="Logo" />
@@ -109,40 +103,50 @@ export default function Navbar() {
     </div>
   ) : (
     <>
-      <div className="w-20 absolute top-2">
-        <img src={logo} alt="Logo" />
-      </div>
+      <div style={{backgroundColor: isOpen ? 'transparent' : '#161618', transition: "background-color 300ms ease-in-out"}} className="flex items-center fixed top-0 w-screen px-4 justify-between z-50 backdrop-blur-sm">
 
-      <div
-        className="w-5 flex flex-col space-y-1 absolute left-3 top-3 cursor-pointer z-10"
-        onClick={handleToggle}
-      >
         <div
-          className={`w-full h-0.5 transition-transform duration-300 ${
-            isOpen
-              ? "transform rotate-45 translate-y-1.5 bg-black"
-              : "bg-stone-50"
-          }`}
-        ></div>
-        <div
-          className={`w-full h-0.5 transition-opacity duration-300 ${
-            isOpen ? "opacity-0" : "opacity-100 bg-stone-50"
-          }`}
-        ></div>
-        <div
-          className={`w-full h-0.5 transition-transform duration-300 ${
-            isOpen
-              ? "transform -rotate-45 -translate-y-1.5 bg-black"
-              : "bg-stone-50"
-          }`}
-        ></div>
+          className="w-5 flex flex-col space-y-1 cursor-pointer z-50"
+          onClick={handleToggle}
+          aria-expanded={isOpen}
+        >
+          {/* First Line */}
+          <div
+            className={`w-full h-0.5 transition-transform duration-300 ${
+              isOpen
+                ? "transform rotate-45 translate-y-1.5 bg-white"
+                : "bg-stone-50"
+            }`}
+          ></div>
+
+          {/* Middle Line */}
+          <div
+            className={`w-full h-0.5 transition-opacity duration-300 ${
+              isOpen ? "opacity-0" : "opacity-100 bg-stone-50"
+            }`}
+          ></div>
+
+          {/* Third Line */}
+          <div
+            className={`w-full h-0.5 transition-transform duration-300 ${
+              isOpen
+                ? "transform -rotate-45 -translate-y-1.5 bg-white"
+                : "bg-stone-50"
+            }`}
+          ></div>
+        </div>
+        <div className="w-20 z-40  top-2 ">
+          <img src={logo} alt="Logo" />
+        </div>
+        <div className="w-20 h-20"></div>
       </div>
 
       <ul
-        className={`nav-link w-full h-screen absolute top-0 left-0 flex flex-col justify-evenly items-left bg-stone-50 z-0 text-4xl sm:text-6xl transition-transform duration-300 ${
+        className={`fixed nav-link w-full h-screen top-0 left-0 flex flex-col justify-evenly items-left   z-10 text-4xl sm:text-6xl transition-transform duration-300 backdrop-blur-sm ${
           isOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
+        <div className="w-full backdrop-blur-lg h-full  opacity-90 bg-stone-900 absolute "></div>
         {navItems.map((item, index) => (
           <NavItem
             key={index}

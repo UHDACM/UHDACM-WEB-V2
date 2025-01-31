@@ -6,7 +6,7 @@ import {
   GithubIcon,
   Globe,
   Linkedin,
-  Slack,
+  Instagram,
   TwitterIcon,
   XIcon,
   YoutubeIcon,
@@ -26,7 +26,7 @@ type PersonTileSocial = {
   style?: React.CSSProperties;
   href?: string;
   href_target?: HTMLAttributeAnchorTarget;
-  onClick?: AnyFunction
+  onClick?: AnyFunction;
 };
 
 export default function PersonTile({
@@ -130,6 +130,7 @@ const SocialIconStyle: React.CSSProperties = {
   borderRadius: 10,
   border: "1px solid #000a",
   cursor: "pointer",
+  color: "black"
 };
 
 function PersonTileExpanded({
@@ -255,89 +256,94 @@ function PersonTileExpanded({
                 </p>
               </div>
               <div className="expandedCardIconContainer">
-                {socials?.map(({ icon, style, href, href_target, onClick }, index) => {
-                  const key = `Social_Icon_${index}`;
-                  const onClickFunc = () => {
-                    HandleClickSocialIcon(href, href_target);
-                    onClick && onClick();
+                {socials?.map(
+                  ({ icon, style, href, href_target, onClick }, index) => {
+                    const key = `Social_Icon_${index}`;
+                    const onClickFunc = () => {
+                      HandleClickSocialIcon(href, href_target);
+                      onClick && onClick();
+                    };
+                    const combinedStyles = { ...SocialIconStyle, ...style };
+                    switch (icon) {
+                      case "personal_site":
+                        return (
+                          <Globe
+                            size={40}
+                            strokeWidth={1}
+                            style={combinedStyles}
+                            onClick={onClickFunc}
+                            key={key}
+                    
+                          />
+                        );
+                      case "facebook":
+                        return (
+                          <Facebook
+                            size={40}
+                            strokeWidth={1}
+                            style={combinedStyles}
+                            onClick={onClickFunc}
+                            key={key}
+                          />
+                        );
+                      case "instagram":
+                        return (
+                          <Instagram
+                            size={40}
+                            strokeWidth={1}
+                            style={combinedStyles}
+                            onClick={onClickFunc}
+                            key={key}
+                          />
+                        );
+                      case "linkedin":
+                        return (
+                          <Linkedin
+                            size={40}
+                            strokeWidth={1}
+                            style={combinedStyles}
+                            onClick={onClickFunc}
+                            key={key}
+                          />
+                        );
+                      case "x":
+                        return (
+                          <TwitterIcon
+                            size={40}
+                            strokeWidth={1}
+                            style={combinedStyles}
+                            onClick={onClickFunc}
+                            key={key}
+                          />
+                        );
+                      case "github":
+                        return (
+                          <GithubIcon
+                            size={40}
+                            strokeWidth={1}
+                            style={combinedStyles}
+                            onClick={onClickFunc}
+                            key={key}
+                            color="black"
+                            
+                          />
+                        );
+                      case "youtube":
+                        return (
+                          <YoutubeIcon
+                            size={40}
+                            strokeWidth={1}
+                            style={combinedStyles}
+                            onClick={onClickFunc}
+                            key={key}
+                          />
+                        );
+                    }
+                    // <Facebook size={40} strokeWidth={1} style={SocialIconStyle}  />
+                    // <Instagram size={40} strokeWidth={1} style={SocialIconStyle}  />
+                    // <TwitterIcon size={40} strokeWidth={1} style={SocialIconStyle} />
                   }
-                  const combinedStyles = { ...SocialIconStyle, ...style }
-                  switch (icon) {
-                    case "personal_site":
-                      return (
-                        <Globe
-                          size={40}
-                          strokeWidth={1}
-                          style={combinedStyles}
-                          onClick={onClickFunc}
-                          key={key}
-                        />
-                      );
-                    case "facebook":
-                      return (
-                        <Facebook
-                          size={40}
-                          strokeWidth={1}
-                          style={combinedStyles}
-                          onClick={onClickFunc}
-                          key={key}
-                        />
-                      );
-                    case "instagram":
-                      return (
-                        <Slack
-                          size={40}
-                          strokeWidth={1}
-                          style={combinedStyles}
-                          onClick={onClickFunc}
-                          key={key}
-                        />
-                      );
-                    case "linkedin":
-                      return (
-                        <Linkedin
-                          size={40}
-                          strokeWidth={1}
-                          style={combinedStyles}
-                          onClick={onClickFunc}
-                          key={key}
-                        />
-                      );
-                    case "x":
-                      return (
-                        <TwitterIcon
-                          size={40}
-                          strokeWidth={1}
-                          style={combinedStyles}
-                          onClick={onClickFunc}
-                          key={key}
-                        />
-                      );
-                    case "github":
-                      return (
-                        <GithubIcon
-                          size={40}
-                          strokeWidth={1}
-                          style={combinedStyles}
-                          onClick={onClickFunc}
-                          key={key}
-                        />
-                      );
-                    case "youtube":
-                      return (
-                        <YoutubeIcon
-                          size={40}
-                          strokeWidth={1}
-                          style={combinedStyles}
-                          onClick={onClickFunc}
-                          key={key}
-                        />
-                      );
-                  }
-                  // <Facebook size={40} strokeWidth={1} style={SocialIconStyle}  />
-                  // <Slack size={40} strokeWidth={1} style={SocialIconStyle}  />
-                  // <TwitterIcon size={40} strokeWidth={1} style={SocialIconStyle} />
-                })}
+                )}
               </div>
               <XIcon
                 style={{
@@ -345,6 +351,7 @@ function PersonTileExpanded({
                   top: 10,
                   right: 10,
                   cursor: "pointer",
+                  color: "black",
                 }}
                 onClick={() => {
                   setOpen(false);
