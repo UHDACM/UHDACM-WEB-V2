@@ -1,19 +1,59 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button/Button";
+import PersonTile from "../components/PersonTile/PersonTile";
 import Navbar from "../components/Navbar/Navbar";
+import { icons } from "lucide-react";
 import EventTile from "../components/EventTile/EventTile.jsx"
 import EventPhoto from "../components/EventTile/acm.png"
 
 
-
+const shortText =
+  "Placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit.";
+const longText =
+  "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod repudiandae ipsam reprehenderit corporis deleniti iusto architecto quibusdam doloremque consectetur, placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit. Laborum, optio, enim eveniet cum, dolore deleniti quae eaque praesentium voluptatibus quibusdam quos tenetur animi? Nostrum, placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit. Laborum, optio, enim eveniet cum, dolore deleniti quae eaque praesentium voluptatibus quibusdam quos tenetur animi? Nostrum, placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit. Laborum, optio, enim eveniet cum, dolore deleniti quae eaque praesentium voluptatibus quibusdam quos tenetur animi? Nostrum.";
 export default function PlaygroundPage() {
-    return (
-        <>
-            <div className='w-screen h-screen flex items-center justify-center align-middle relative'>
-                <PGPHeader/>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="w-screen h-screen flex items-center justify-center align-middle relative">
+        <PGPHeader />
+        <PersonTile
+          previewTitle="Gael C."
+          fullTitle="Gael Bomboclat Cruz"
+          previewSubTitle="Developer"
+          fullSubtitle="Developer"
+          socials={[
+            {
+              icon: "personal_site",
+              href: "https://deiahri.github.io/portfolio",
+            },
+            {
+              icon: "youtube",
+              href: "https://www.youtube.com/@DeiahriDev-kz6xs",
+            },
+            {
+              icon: 'facebook',
+              href: "https://www.youtube.com/@DeiahriDev-kz6xs",
+            },
+            {
+                icon: 'instagram',
+            },
+            {
+                icon: 'linkedin'
+            },
+            {
+                icon: 'x'
+            },
+            
+          ]}
+          fullDescription={longText}
+          img={
+            "https://deiahri.github.io/portfolio/img/Photo-of-me-rounded.png"
+          }
+        />
+      </div>
+      <div style={{ height: "200vw" }} />
+      {/* added this to test components that should be fixed to the screen on scroll */}
+    </>
+  );
 }
 
 function PGPHeader() {
@@ -87,6 +127,8 @@ function PGPHeader() {
             Back
           </button>
         </div>
+
+        <Navbar />
   
         <div className="p-8 bg-zinc-900 space-y-8">
           {/* Other Events */}
