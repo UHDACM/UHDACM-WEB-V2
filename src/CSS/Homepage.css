@@ -1,0 +1,28 @@
+/* Base styles */
+.responsive-bg {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: -20px center; /* Default position */
+}
+
+/* For screens up to 600px */
+@media (max-width: 600px) {
+  .responsive-bg {
+    background-position: -500px center; /* Move image further to the right */
+  }
+}
+
+/* For screens between 601px and 1000px */
+@media (min-width: 601px) and (max-width: 1000px) {
+  .responsive-bg {
+    background-position: -400px center; /* Move image slightly to the right */
+  }
+}
+
+/* For screens larger than 1000px */
+@media (min-width: 1001px) {
+  .responsive-bg {
+    background-position: right center; /* Move image to the right */
+    background-size: cover; /* Zoom in */
+  }
+}

@@ -5,9 +5,9 @@ export default function Button({ label }) {
 
   return (
     <div className="bg-stone-500 p-2 rounded-full px-8 py-2 relative shadow-lg">
-      <p className="text-center">{label}</p>
+      <p className="text-center lg:text-2xl">{label}</p>
       <button
-        className={`text-stone-800 bg-stone-100 rounded-full absolute -top-3 w-full left-1.5 shadow-lg transform transition-transform duration-100 ease-in-out ${isActive ? 'translate-y-1 -translate-x-1' : ''} flex items-center justify-center`}
+        className={`lg:text-lg text-stone-800 bg-stone-100 rounded-full absolute -top-3 w-full left-1.5 shadow-lg transform transition-transform duration-100 ease-in-out ${isActive ? 'translate-y-1 -translate-x-1' : ''} flex items-center justify-center`}
         onMouseDown={() => setIsActive(true)}
         onMouseUp={() => setIsActive(false)}
         onMouseLeave={() => setIsActive(false)}

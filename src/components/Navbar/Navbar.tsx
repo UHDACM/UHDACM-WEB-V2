@@ -47,7 +47,7 @@ const NavItem = ({ text, dropdownItems }) => {
           {dropdownItems.map((item, index) => (
             <li
               key={index}
-              className="text-4xl py-2 translate hover:ml-10 duration-200"
+              className="text-2xl lg:text-2xl py-2 translate hover:ml-10 duration-200"
             >
               <NavItem text={item.text} dropdownItems={item.subItems} />
             </li>
@@ -93,18 +93,24 @@ export default function Navbar() {
     { text: "Account" },
   ];
 
-  return loading ? (
-    <div className="fixed flex items-center justify-center h-screen w-screen z-40 bg-stone-900">
-      <div className="absolute logo-div">
-        <div className="loading-logo">
-          <img src={logo} alt="Logo" />
-        </div>
-      </div>
-    </div>
-  ) : (
+  // return loading ? (
+  //   <div className="fixed flex items-center justify-center h-screen w-screen z-40 bg-stone-900">
+  //     <div className="absolute logo-div">
+  //       <div className="loading-logo">
+  //         <img src={logo} alt="Logo" />
+  //       </div>
+  //     </div>
+  //   </div>
+  // ) : (
+  return (
     <>
-      <div style={{backgroundColor: isOpen ? 'transparent' : '#161618', transition: "background-color 300ms ease-in-out"}} className="flex items-center fixed top-0 w-screen px-4 justify-between z-50 backdrop-blur-sm">
-
+      <div
+        style={{
+          backgroundColor: isOpen ? "transparent" : "#161618",
+          transition: "background-color 300ms ease-in-out",
+        }}
+        className="flex items-center fixed top-0 w-screen px-4 py-3 justify-between z-50 backdrop-blur-sm"
+      >
         <div
           className="w-5 flex flex-col space-y-1 cursor-pointer z-50"
           onClick={handleToggle}
@@ -138,7 +144,7 @@ export default function Navbar() {
         <div className="w-20 z-40  top-2 ">
           <img src={logo} alt="Logo" />
         </div>
-        <div className="w-20 h-20"></div>
+        <div className="w-5 h-5"></div>
       </div>
 
       <ul
