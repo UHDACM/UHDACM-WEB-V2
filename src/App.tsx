@@ -1,16 +1,15 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import PlaygroundPage from "./pages/PlaygroundPage";
-
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/playground" element={<PlaygroundPage/>}/>
-
-        
+        <Route path="/" element={<HomePage />} />
+        <Route path="/playground" element={<PlaygroundPage />} />
         {/* Used to reroute to home page if on an undefined path. */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import PersonTile from "../components/PersonTile/PersonTile";
 import Navbar from "../components/Navbar/Navbar";
 import { icons } from "lucide-react";
+import "../CSS/Homepage.css"
 
 const shortText =
   "Placeat illo, consequuntur inventore, recusandae repellendus illum harum quo atque rem voluptatem minima dolorum velit.";
@@ -49,6 +50,7 @@ export default function PlaygroundPage() {
       </div>
       <div style={{ height: "200vw" }} />
       {/* added this to test components that should be fixed to the screen on scroll */}
+      <div id="hero-image"></div>
     </>
   );
 }
@@ -62,7 +64,7 @@ function PGPHeader() {
           Back
         </button>
       </div>
-      <Navbar />
+      {/* <Navbar /> */}
       {/* <Button label={'hello'} /> */}
     </>
   );
